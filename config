@@ -1,0 +1,230 @@
+#Colors
+#set_from_resource $darkred     color1  #000000
+#et_from_resource  $red         color9  #000000
+#set_from_resource $darkgreen   color2  #000000
+#set_from_resource $green       color10 #000000
+#set_from_resource $darkyellow  color3  #000000
+#set_from_resource $yellow      color11 #000000
+#set_from_resource $darkblue    color4  #000000
+#set_from_resource $blue        color12 #000000
+#set_from_resource $darkmagenta color5  #000000
+#set_from_resource $magenta     color13 #000000
+#set_from_resource $darkcyan    color6  #000000
+#set_from_resource $cyan        color14 #000000
+#set_from_resource $darkwhite   color7  #000000
+#set_from_resource $white       color15 #000000
+#set $black        #282828
+#set $darkblack    #1d2021
+#set $transparent  #00000000
+#Default Modifier
+set $mod Mod4
+#Default Terminal Emulator
+set $editor xfce4-terminal
+#Font
+font pango:URW Gothic Book 10
+#Floating Modifier
+floating_modifier $mod
+
+#Pulse Audio controls
+#/usr/bin/
+bindsym F12 exec --no-startup-id pulseaudio-ctl up #increase sound volume
+bindsym F11 exec --no-startup-id pulseaudio-ctl down #decrease sound volume
+bindsym F10 exec --no-startup-id pulseaudio-ctl mute # mute sound
+bindsym F8 	exec --no-startup-id playerctl play-pause
+bindsym F9 	exec --no-startup-id playerctl next
+bindsym F7 	exec --no-startup-id playerctl previous
+
+# Sreen brightness controls
+bindsym F2 	exec brightnessctl s 5+
+bindsym F1 	exec brightnessctl s 5-
+
+#Start a Terminal
+bindsym $mod+Return 		exec xfce4-terminal
+bindsym $mod+Shift+Return 	exec urxvt
+bindsym $mod+F1     		exec firefox
+bindsym $mod+Shift+F1 		exec opera
+bindsym $mod+F2     		exec thunar
+bindsym $mod+shift+F2   	exec gksudo thunar
+bindsym $mod+F3	    		exec geany
+bindsym $mod+shift+x 		exec i3lock-fancy
+bindsym Shift+XF86Eject 	exec xfce4-screenshooter
+
+#                       BORDER      			BACKGROUND  			TEXT
+client.focused 		    #9b703f 				#9b703f					#ffffff 				#FF0000
+#client.unfocused 		#444444 				#222222 				#ffffff
+#client.focused         #000000 				#000000 				#FD9D0D 				#FD9D0D
+client.focused_inactive #242424 				#242424 				#A48E6D 				#FD9D0D
+client.unfocused        #242424 				#242424 				#A48E6D 				#FD9D0D
+client.urgent 			#ff8000 				#ff8000 				#ff0000 				#900000
+
+#Gaps and Borders
+gaps inner 10
+gaps outer 0
+smart_borders on
+smart_gaps on
+bindsym $mod+j mode "$mode_gaps"
+mode "$mode_gaps" {
+    bindsym $mod+k  gaps outer all plus 5
+    bindsym $mod+l gaps outer all minus 5
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+#Autostart
+exec --no-startup-id bash Belgeler/setxkbmap.sh
+exec_always feh --bg-scale /home/gazellejaeger/Resimler/Wallpapers/forest-minimalist-po.jpg
+exec --no-startup-id xcompmgr -o -f -n
+exec xautolock -locker i3lock-fancy
+exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
+#exec --no-startup-id xfce4-clipman
+#exec --no-startup-id redshift-gtk
+#exec --no-startup-id caffeine
+#exec blueman-applet
+#exec --no-startup-id pasystray
+#exec --no-startup-id nm-applet
+# exec --no-startup-id compton -f
+# exec --no-startup-id skypeforlinux
+# exec_always sudo python $HOME/Belgeler/colorcycle.py 
+# exec bash ~/.conky/conky-startup.sh
+# exec xfce4-terminal
+exec --no-startup-id zx
+#Bar
+bar {
+    colors {
+        # Whole color settings
+        background #1e1e1e
+        statusline #ffffff
+        separator  #1e1e1e
+
+        # Type             border  background font
+        focused_workspace  #1e1e1e #1e1e1e #cf6a4c
+        active_workspace   #1e1e1e #222222 #cf6a4c
+        inactive_workspace #1e1e1e #1e1e1e #888888
+        urgent_workspace   #aa0000 #990000 #ffffff
+}
+ font pango:URW Gothic Book 10
+ position bottom
+ tray_output none
+ status_command bumblebee-status -m nic memory cpu mpd redshift caffeine brightness pasink bluetooth datetime -p root.path=/ nic.left-click="nm-connection-editor" time.format="%H:%M CW %V" date.format="%a, %b %d %Y" -t gruvbox-powerline
+#-powerline
+}
+
+#Kill Focused Window
+bindsym $mod+Shift+q kill
+
+#Program Launcher
+bindsym $mod+d exec rofi -show run -lines 10
+#Rofi window switcher
+bindsym $mod+Shift+d exec rofi -show window -lines 10
+
+#Select Windows:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+#Move Windows
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# scratchpad
+bindsym $mod+Shift+p move scratchpad
+bindsym $mod+p 		scratchpad show
+
+#Split in Horizontal Orientation
+bindsym $mod+h split h
+
+#Split in Vertical Orientation
+bindsym $mod+v split v
+
+#Enter Fullscreen Mode for the Focused Container
+bindsym $mod+f fullscreen toggle
+
+#Change Container Layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+#Toggle Tiling / Floating
+bindsym $mod+Shift+space floating toggle
+
+#Change Focus Between Tiling / Floating Windows
+bindsym $mod+space focus mode_toggle
+
+#Focus the Parent Container
+bindsym $mod+a focus parent
+
+#Focus the Child Container
+#bindsym $mod+d focus child
+
+#Switch to Workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+
+#Move Focused Container to Workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+
+#Reload the Configuration File
+bindsym $mod+Shift+c reload
+#Restart i3 Inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+#Exit i3 (logs you out of your X session)
+bindsym $mod+0 exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+#Resize Window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+new_window pixel 2
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
+for_window [class="(?i)VirtualBox"] floating enable
+for_window [class="(?i)blueman"] floating enable
+for_window [class="(?i)lxappearance"] floating enable
+for_window [class="(?i)pavucontrol"] floating enable
+for_window [class="(?i)nm-connection-editor"] floating enable
+for_window [class="(?i)gnome-system-monitor"] floating enable
+for_window [class="(?i)Beancash-qt"] floating enable
