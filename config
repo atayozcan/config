@@ -26,7 +26,6 @@ font pango:URW Gothic Book 10
 floating_modifier $mod
 
 #Pulse Audio controls
-#/usr/bin/
 bindsym F12 exec --no-startup-id pulseaudio-ctl up #increase sound volume
 bindsym F11 exec --no-startup-id pulseaudio-ctl down #decrease sound volume
 bindsym F10 exec --no-startup-id pulseaudio-ctl mute # mute sound
@@ -37,25 +36,26 @@ bindsym F7 	exec --no-startup-id playerctl previous
 # Sreen brightness controls
 bindsym F2 	exec brightnessctl s 5+
 bindsym F1 	exec brightnessctl s 5-
+bindsym F4	exec bash ~/.config/i3/brightness.sh
+bindsym Shift+F4 exec pkill bash
+#Keybinds
+bindsym $mod+Return					exec xfce4-terminal
+bindsym $mod+Shift+Return		exec xfce4-terminal --drop-down
+bindsym $mod+F1							exec firefox
+bindsym $mod+Shift+F1				exec opera
+bindsym $mod+F2							exec thunar
+bindsym $mod+shift+F2				exec gksudo thunar
+bindsym $mod+F3							exec atom
+bindsym $mod+shift+x				exec i3lock-fancy
+bindsym Shift+XF86Eject			exec xfce4-screenshooter
 
-#Start a Terminal
-bindsym $mod+Return 		exec xfce4-terminal
-bindsym $mod+Shift+Return 	exec urxvt
-bindsym $mod+F1     		exec firefox
-bindsym $mod+Shift+F1 		exec opera
-bindsym $mod+F2     		exec thunar
-bindsym $mod+shift+F2   	exec gksudo thunar
-bindsym $mod+F3	    		exec geany
-bindsym $mod+shift+x 		exec i3lock-fancy
-bindsym Shift+XF86Eject 	exec xfce4-screenshooter
-
-#                       BORDER      			BACKGROUND  			TEXT
-client.focused 		    #9b703f 				#9b703f					#ffffff 				#FF0000
-#client.unfocused 		#444444 				#222222 				#ffffff
-#client.focused         #000000 				#000000 				#FD9D0D 				#FD9D0D
+#												BORDER					BACKGROUND			TEXT
+client.focused					#9b703f					#9b703f					#ffffff					#FF0000
+#client.unfocused				#444444 				#222222 				#ffffff
+#client.focused					#000000 				#000000 				#FD9D0D 				#FD9D0D
 client.focused_inactive #242424 				#242424 				#A48E6D 				#FD9D0D
-client.unfocused        #242424 				#242424 				#A48E6D 				#FD9D0D
-client.urgent 			#ff8000 				#ff8000 				#ff0000 				#900000
+client.unfocused				#242424 				#242424 				#A48E6D 				#FD9D0D
+client.urgent						#ff8000 				#ff8000 				#ff0000 				#900000
 
 #Gaps and Borders
 gaps inner 10
@@ -71,9 +71,12 @@ mode "$mode_gaps" {
 }
 
 #Autostart
-exec --no-startup-id bash Belgeler/setxkbmap.sh
-exec_always feh --bg-scale /home/gazellejaeger/Resimler/Wallpapers/forest-minimalist-po.jpg
-exec --no-startup-id xcompmgr -o -f -n
+#exec_always feh --bg-scale ~/Resimler/Wallpapers/forest-minimalist-po.jpg
+	exec_always --no-startup-id nitrogen --restore
+	bindsym $mod+Shift+f exec feh --bg-scale ~/Resimler/Wallpapers/anime/854465.png --no-startup-id
+exec --no-startup-id bash ~/.config/i3/brightness.sh
+exec --no-startup-id  gksudo chown gazellejaeger /sys/class/backlight/acpi_video1/*
+exec --no-startup-id compton
 exec xautolock -locker i3lock-fancy
 exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
 #exec --no-startup-id xfce4-clipman
@@ -82,12 +85,12 @@ exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
 #exec blueman-applet
 #exec --no-startup-id pasystray
 #exec --no-startup-id nm-applet
-# exec --no-startup-id compton -f
-# exec --no-startup-id skypeforlinux
-# exec_always sudo python $HOME/Belgeler/colorcycle.py 
-# exec bash ~/.conky/conky-startup.sh
-# exec xfce4-terminal
-exec --no-startup-id zx
+#exec --no-startup-id compton -f
+#exec --no-startup-id skypeforlinux
+#exec_always sudo python $HOME/Belgeler/colorcycle.py
+#exec bash ~/.conky/conky-startup.sh
+#exec xfce4-terminal
+#exec --no-startup-id zx
 #Bar
 bar {
     colors {
@@ -103,7 +106,7 @@ bar {
         urgent_workspace   #aa0000 #990000 #ffffff
 }
  font pango:URW Gothic Book 10
- position bottom
+ position top
  tray_output none
  status_command bumblebee-status -m nic memory cpu mpd redshift caffeine brightness pasink bluetooth datetime -p root.path=/ nic.left-click="nm-connection-editor" time.format="%H:%M CW %V" date.format="%a, %b %d %Y" -t gruvbox-powerline
 #-powerline
@@ -118,20 +121,20 @@ bindsym $mod+d exec rofi -show run -lines 10
 bindsym $mod+Shift+d exec rofi -show window -lines 10
 
 #Select Windows:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Left 	focus left
+bindsym $mod+Down 	focus down
+bindsym $mod+Up 		focus up
+bindsym $mod+Right 	focus right
 
 #Move Windows
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left 	move left
+bindsym $mod+Shift+Down 	move down
+bindsym $mod+Shift+Up 		move up
+bindsym $mod+Shift+Right 	move right
 
 # scratchpad
-bindsym $mod+Shift+p move scratchpad
-bindsym $mod+p 		scratchpad show
+bindsym $mod+Shift+p 	move scratchpad
+bindsym $mod+p 				scratchpad show
 
 #Split in Horizontal Orientation
 bindsym $mod+h split h
@@ -228,3 +231,4 @@ for_window [class="(?i)pavucontrol"] floating enable
 for_window [class="(?i)nm-connection-editor"] floating enable
 for_window [class="(?i)gnome-system-monitor"] floating enable
 for_window [class="(?i)Beancash-qt"] floating enable
+for_window [class="(?i)nitrogen"] floating enable
