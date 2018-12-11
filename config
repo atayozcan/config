@@ -1,61 +1,65 @@
 #Colors
-#set_from_resource $darkred     color1  #000000
-#et_from_resource  $red         color9  #000000
-#set_from_resource $darkgreen   color2  #000000
-#set_from_resource $green       color10 #000000
-#set_from_resource $darkyellow  color3  #000000
-#set_from_resource $yellow      color11 #000000
-#set_from_resource $darkblue    color4  #000000
-#set_from_resource $blue        color12 #000000
-#set_from_resource $darkmagenta color5  #000000
-#set_from_resource $magenta     color13 #000000
-#set_from_resource $darkcyan    color6  #000000
-#set_from_resource $cyan        color14 #000000
-#set_from_resource $darkwhite   color7  #000000
-#set_from_resource $white       color15 #000000
+#set_from_resource $darkred     color1
+#et_from_resource  $red         color9
+#set_from_resource $darkgreen   color2
+#set_from_resource $green       color10
+#set_from_resource $darkyellow  color3
+#set_from_resource $yellow      color11
+#set_from_resource $darkblue    color4
+#set_from_resource $blue        color12
+#set_from_resource $darkmagenta color5
+#set_from_resource $magenta     color13
+#set_from_resource $darkcyan    color6
+#set_from_resource $cyan        color14
+#set_from_resource $darkwhite   color7
+#set_from_resource $white       color15
 #set $black        #282828
 #set $darkblack    #1d2021
 #set $transparent  #00000000
+
 #Default Modifier
 set $mod Mod4
 #Default Terminal Emulator
 set $editor xfce4-terminal
 #Font
-font pango:URW Gothic Book 10
+font pango:URW Gothic, Book 12
 #Floating Modifier
 floating_modifier $mod
 
 #Pulse Audio controls
-bindsym F12 exec --no-startup-id pulseaudio-ctl up #increase sound volume
-bindsym F11 exec --no-startup-id pulseaudio-ctl down #decrease sound volume
-bindsym F10 exec --no-startup-id pulseaudio-ctl mute # mute sound
+bindsym F12 	exec --no-startup-id pulseaudio-ctl up   #increase sound volume
+bindsym F11 	exec --no-startup-id pulseaudio-ctl down #decrease sound volume
+bindsym F10 	exec --no-startup-id pulseaudio-ctl mute #mute sound
 bindsym F8 	exec --no-startup-id playerctl play-pause
 bindsym F9 	exec --no-startup-id playerctl next
 bindsym F7 	exec --no-startup-id playerctl previous
 
 # Sreen brightness controls
-bindsym F2 	exec brightnessctl s 5+
-bindsym F1 	exec brightnessctl s 5-
-bindsym F4	exec bash ~/.config/i3/brightness.sh
+bindsym F2 	 exec brightnessctl s 5+ & brightnessctl -s
+bindsym F1 	 exec brightnessctl s 5- & brightnessctl -s
+bindsym F4	 exec bash ~/.config/i3/brightness.sh
 bindsym Shift+F4 exec pkill bash
-#Keybinds
-bindsym $mod+Return					exec xfce4-terminal
-bindsym $mod+Shift+Return		exec xfce4-terminal --drop-down
-bindsym $mod+F1							exec firefox
-bindsym $mod+Shift+F1				exec opera
-bindsym $mod+F2							exec thunar
-bindsym $mod+shift+F2				exec gksudo thunar
-bindsym $mod+F3							exec atom
-bindsym $mod+shift+x				exec i3lock-fancy
-bindsym Shift+XF86Eject			exec xfce4-screenshooter
 
-#												BORDER					BACKGROUND			TEXT
+#Keybinds
+bindsym $mod+Return	  exec xfce4-terminal
+bindsym $mod+Shift+Return exec xfce4-terminal --drop-down
+bindsym $mod+F1		  exec firefox
+bindsym $mod+Shift+F1	  exec opera
+bindsym $mod+F2		  exec xfce4-terminal -e mc
+bindsym $mod+shift+F2	  exec sudo xfce4-terminal -e mc
+bindsym $mod+F3		  exec xfce4-terminal -x vim ~/.config/i3/config
+bindsym $mod+shift+x	  exec i3lock-fancy & sleep 1 && xset dpms force off
+bindsym Shift+XF86Eject	  exec xfce4-screenshooter
+bindsym $mod+Shift+n      exec feh --bg-scale ~/Resimler/Duvar\ kağıtları/yoko.jpg
+bindsym $mod+n            exec feh --bg-scale ~/Resimler/Duvar\ kağıtları/arch\ linux\ more\ than\ alive.png
+
+#						BORDER					BACKGROUND				TEXT
 client.focused					#9b703f					#9b703f					#ffffff					#FF0000
-#client.unfocused				#444444 				#222222 				#ffffff
-#client.focused					#000000 				#000000 				#FD9D0D 				#FD9D0D
-client.focused_inactive #242424 				#242424 				#A48E6D 				#FD9D0D
+client.unfocused				#444444 				#222222 				#ffffff
+client.focused					#000000 				#000000 				#FD9D0D 				#FD9D0D
+client.focused_inactive 			#242424 				#242424 				#A48E6D 				#FD9D0D
 client.unfocused				#242424 				#242424 				#A48E6D 				#FD9D0D
-client.urgent						#ff8000 				#ff8000 				#ff0000 				#900000
+client.urgent					#ff8000 				#ff8000 				#ff0000 				#900000
 
 #Gaps and Borders
 gaps inner 10
@@ -71,31 +75,26 @@ mode "$mode_gaps" {
 }
 
 #Autostart
-#exec_always feh --bg-scale ~/Resimler/Wallpapers/forest-minimalist-po.jpg
-	exec_always --no-startup-id nitrogen --restore
-	bindsym $mod+Shift+f exec feh --bg-scale ~/Resimler/Wallpapers/anime/854465.png --no-startup-id
-exec --no-startup-id bash ~/.config/i3/brightness.sh
-exec --no-startup-id  gksudo chown gazellejaeger /sys/class/backlight/acpi_video1/*
-exec --no-startup-id compton
-exec xautolock -locker i3lock-fancy
+#exec_always feh --bg-scale ~/Resimler/Wallpapers/lonelyisland_1920x1080.jpg
+#exec --no-startup-id xrandr --output DP1 --mode 1280x1024 --output DP3 --left-of DP1
+exec --no-startup-id nitrogen --restore
+#exec --no-startup-id bash ~/.config/i3/brightness.sh
+exec --no-startup-id gksudo chown gazellejaeger /sys/class/backlight/acpi_video1/*
+exec --no-startup-id compton -f
+exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy" &
 exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
-#exec --no-startup-id xfce4-clipman
-#exec --no-startup-id redshift-gtk
-#exec --no-startup-id caffeine
-#exec blueman-applet
-#exec --no-startup-id pasystray
-#exec --no-startup-id nm-applet
-#exec --no-startup-id compton -f
-#exec --no-startup-id skypeforlinux
+exec --no-startup-id brightnessctl -r
+exec --no-startup-id redshiftgui -n
 #exec_always sudo python $HOME/Belgeler/colorcycle.py
 #exec bash ~/.conky/conky-startup.sh
-#exec xfce4-terminal
 #exec --no-startup-id zx
+
 #Bar
 bar {
     colors {
-        # Whole color settings
+	# Whole color settings
         background #1e1e1e
+        statusline #ffffff
         statusline #ffffff
         separator  #1e1e1e
 
@@ -108,8 +107,7 @@ bar {
  font pango:URW Gothic Book 10
  position top
  tray_output none
- status_command bumblebee-status -m nic memory cpu mpd redshift caffeine brightness pasink bluetooth datetime -p root.path=/ nic.left-click="nm-connection-editor" time.format="%H:%M CW %V" date.format="%a, %b %d %Y" -t gruvbox-powerline
-#-powerline
+ status_command bumblebee-status -m title nic mpd caffeine pasink bluetooth datetime -p root.path=/ nic.left-click="nm-connection-editor" time.format="%H:%M CW %V" date.format="%a, %b %d %Y" -t gruvbox
 }
 
 #Kill Focused Window
@@ -117,24 +115,25 @@ bindsym $mod+Shift+q kill
 
 #Program Launcher
 bindsym $mod+d exec rofi -show run -lines 10
+
 #Rofi window switcher
 bindsym $mod+Shift+d exec rofi -show window -lines 10
 
 #Select Windows:
 bindsym $mod+Left 	focus left
 bindsym $mod+Down 	focus down
-bindsym $mod+Up 		focus up
+bindsym $mod+Up 	focus up
 bindsym $mod+Right 	focus right
 
 #Move Windows
-bindsym $mod+Shift+Left 	move left
-bindsym $mod+Shift+Down 	move down
-bindsym $mod+Shift+Up 		move up
-bindsym $mod+Shift+Right 	move right
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up 	 move up
+bindsym $mod+Shift+Right move right
 
 # scratchpad
-bindsym $mod+Shift+p 	move scratchpad
-bindsym $mod+p 				scratchpad show
+bindsym $mod+Shift+p move scratchpad
+bindsym $mod+p 	     scratchpad show
 
 #Split in Horizontal Orientation
 bindsym $mod+h split h
@@ -184,12 +183,13 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 
+
 #Reload the Configuration File
 bindsym $mod+Shift+c reload
 #Restart i3 Inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 #Exit i3 (logs you out of your X session)
-bindsym $mod+0 exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+0 exit i3
 
 #Resize Window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -207,7 +207,6 @@ mode "resize" {
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
@@ -232,3 +231,6 @@ for_window [class="(?i)nm-connection-editor"] floating enable
 for_window [class="(?i)gnome-system-monitor"] floating enable
 for_window [class="(?i)Beancash-qt"] floating enable
 for_window [class="(?i)nitrogen"] floating enable
+for_window [class="(?i)syncthing-gtk"] floating enable
+for_window [class="(?i)grub-customizer"] floating enable
+for_window [class="(?i)qalculate-gtk"] floating enable
